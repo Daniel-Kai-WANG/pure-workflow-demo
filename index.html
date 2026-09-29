@@ -14,6 +14,11 @@ html{scroll-behavior:smooth}header{max-width:1280px}.wordmark{letter-spacing:-2p
 @media(max-width:1050px){.decision-footer{align-items:flex-start;flex-direction:column}.scenario-picker{flex-wrap:wrap}.review-change{padding:17px}.message-top>.service{display:none}}
 @media(max-width:750px){.stage{padding:22px 18px;border-radius:18px}.scene-grid,.review-list,.task-grid{grid-template-columns:1fr}.scene-grid{gap:18px}.scene-heading h2{font-size:29px}.scene-heading>p:last-child{font-size:14px}.story-toolbar{gap:12px}.story-toolbar .eyebrow{font-size:9px}.review-change{display:flex;gap:14px}.review-change>div{min-width:0;flex:1}.review-change h3{margin:0;min-height:0}.comparison{opacity:1}.comparison:not(.revealed){background:#f4f4ef;color:var(--muted)}.comparison-list{gap:10px}.scene-actions{align-items:stretch;flex-direction:column}.scenario-picker{justify-content:space-between}.scenario-picker select{width:100%}.ending-actions{align-items:stretch;flex-direction:column}.ending-actions>div{display:flex;flex-direction:column}.ending-actions .secondary{margin-right:0}.decision-footer .actions{width:100%;flex-direction:column}.boundary-card{align-items:flex-start;padding:18px;gap:14px}.boundary-card .large-mark{width:38px;height:38px;font-size:24px}.message-card blockquote{font-size:15px}.scene-heading{margin-bottom:22px}.context-card{padding:22px}.context-card .large-mark{float:right}.context-card h3{font-size:24px}.board-caption{flex-wrap:wrap}#ending:empty{min-height:180px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+.system-map{border:1px solid var(--line);border-radius:18px;padding:22px;margin:0 0 22px;background:#eeefe8}.systems-heading{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:16px}.systems-heading .eyebrow{margin:0}.systems-heading>span{font-size:11px;color:var(--muted)}.system-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}.system-node{display:flex;flex-direction:column;align-items:flex-start;gap:7px;text-align:left;padding:14px;background:#f9faf6;min-width:0;border-radius:12px;transition:background .25s,border-color .25s}.app-mark{display:inline-grid;place-items:center;flex-shrink:0;width:30px;height:30px;border:1px solid var(--line);background:white;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:-.3px;color:var(--ink)}.system-node>strong{font-size:13px}.system-node>span:last-child{font-size:11px;font-weight:400;color:var(--muted)}.system-node.in-use{border-color:#97ac92;background:#f3f8ef}.system-node[aria-pressed=true]{background:var(--action);border-color:var(--action);color:white}.system-node[aria-pressed=true]>span:last-child{color:#d8dfd1}.system-node[aria-pressed=true] .app-mark{background:var(--accent);border-color:var(--accent)}.system-route{font-size:14px;margin:17px 0 12px}.system-inspector{border-top:1px solid #ccd1c4;padding-top:12px;min-height:85px}.system-inspector strong{font-size:13px}.system-inspector p{font-size:12px;color:var(--muted);margin:4px 0 0;max-width:850px}.system-badge{display:flex;align-items:center;gap:9px;padding:12px 15px;border-bottom:1px solid var(--line);font-size:13px;background:#f2f3ec;border-radius:12px 12px 0 0}.system-badge>span:last-child{font-size:11px;font-weight:400;color:var(--muted);margin-left:auto}.context-card>.system-badge{margin:-25px -30px 22px}.comparison-list>.system-badge{border:1px solid var(--line);border-radius:12px}.stage>.system-badge{margin-bottom:17px}.execution-handoff{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:24px}.execution-handoff .system-badge{border:1px solid var(--line);border-radius:12px;flex:1;flex-wrap:wrap}.execution-handoff .system-badge>span:last-child{width:100%;margin:0}.execution-handoff>span{color:var(--green)}
+@media(max-width:1000px){.system-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.systems-heading{align-items:flex-start;flex-direction:column;gap:5px}}
+@media(max-width:750px){.system-map{padding:15px}.system-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.system-node{padding:12px}.system-inspector{min-height:120px}.system-badge{flex-wrap:wrap}.system-badge>span:last-child{width:100%;margin-left:39px}.context-card>.system-badge{margin:-22px -22px 20px}.execution-handoff{gap:6px}.execution-handoff .system-badge{min-width:0;padding:10px;justify-content:center;text-align:center}.execution-handoff .app-mark{display:none}.execution-handoff .system-badge>span:last-child{margin:0}.system-route{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.system-node{transition:none}}
 </style></head>
 <body>
 <header><a class="wordmark" href="#">pure<span> / AI</span></a><span class="tag">INTERACTIVE CONCEPT · SEPTEMBER 2026</span></header>
@@ -23,6 +28,7 @@ html{scroll-behavior:smooth}header{max-width:1280px}.wordmark{letter-spacing:-2p
 <div class="story-toolbar"><p class="eyebrow">YOU ARE JAMIE · ACCOUNT MANAGER</p><button class="quiet" id="reset">Start over ↺</button></div>
 <nav class="steps" aria-label="Story progress"><span id="step1">01 Receive</span><span id="step2">02 Connect</span><span id="step3">03 Decide</span><span id="step4">04 Resolve</span></nav>
 <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+<section id="system-map" class="system-map" aria-label="Systems in this story"></section>
 <div id="stage" class="stage"></div>
 <details class="audit"><summary>Behind the scenes · activity record</summary><ol id="log"></ol></details>
 </section>
@@ -44,12 +50,46 @@ const storyState = { scenario: 'change', phase: 'receive', applied: 0, run: 0 };
 const byId = id => document.getElementById(id);
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+const systems = {
+  gmail: { name: 'Gmail', mark: 'M', role: 'Client correspondence', detail: 'Only messages explicitly CC’d to the dedicated Pure AI mailbox enter the workflow. Staff inboxes are not scanned.' },
+  drive: { name: 'Google Drive', mark: 'D', role: 'Authorised context', detail: 'Supplies the approved brief and permitted project documents. Staff can also deliberately supply notes and transcripts.' },
+  openai: { name: 'OpenAI', mark: 'AI', role: 'Interpret and compare', detail: 'Compares the request with authorised context and current Monday tasks. It prepares suggestions; it does not approve its own work.' },
+  discord: { name: 'Discord', mark: '#', role: 'Staff interaction', detail: 'Staff submit information, ask questions, review proposals and receive results here. Approval must come from an authorised person.' },
+  n8n: { name: 'n8n', mark: '↗', role: 'Connect and execute', detail: 'Coordinates intake, permission checks, retrieval and approval hand-offs. After approval, it executes defined updates and records the result.' },
+  monday: { name: 'Monday', mark: '≡', role: 'The work record', detail: 'Supplies the current tasks for comparison and stores approved updates. It remains the source of truth for owners, dates and status.' }
+};
+const systemScenes = {
+  receive: { focus: 'gmail', active: ['gmail'], line: 'Gmail brings the request. Google Drive holds the brief. Monday holds the current work.', states: ['Input', 'Brief', 'Reasoning', 'Review', 'Workflow', 'Work record'] },
+  compare: { focus: 'openai', active: ['gmail', 'drive', 'openai', 'n8n', 'monday'], line: 'n8n retrieves permitted context from Gmail, Drive and Monday. OpenAI compares it and prepares a proposal.', states: ['Source', 'Context', 'Comparing', 'Next: review', 'Coordinating', 'Read only'] },
+  review: { focus: 'discord', active: ['discord'], line: 'The proposal arrives in Discord. Jamie reviews the evidence; n8n waits for approval. Monday is unchanged.', states: ['Evidence', 'Evidence', 'Proposal ready', 'Your decision', 'Waiting', 'Unchanged'] },
+  applying: { focus: 'n8n', active: ['n8n', 'monday'], line: 'Jamie approved in Discord. n8n now applies those exact changes to Monday.', states: ['Source retained', 'Brief retained', 'Proposal ready', 'Approved', 'Executing', 'Updating'] },
+  applied: { focus: 'monday', active: ['discord', 'monday'], line: 'Monday holds the updated work. n8n records the outcome and reports completion back to Discord.', states: ['Source retained', 'Brief retained', 'Proposal ready', 'Result received', 'Complete', 'Updated'] },
+  rejected: { focus: 'discord', active: ['discord'], line: 'Jamie declined in Discord. n8n does not execute the proposal; Monday keeps the current plan.', states: ['Source retained', 'Brief retained', 'Proposal ready', 'Declined', 'No execution', 'Unchanged'] },
+  ignored: { focus: 'gmail', active: ['gmail', 'n8n'], line: 'The CC check stops intake. No email content goes to OpenAI, no project context is retrieved and Monday stays unchanged.', states: ['CC missing', 'Not retrieved', 'Not called', 'No proposal', 'Intake stopped', 'Unchanged'] },
+  blocked: { focus: 'discord', active: ['discord'], line: 'The comparison found conflicting instructions. Discord asks Jamie to clarify; n8n has no approved change to execute.', states: ['Thursday', 'Friday note', 'Conflict found', 'Clarify first', 'No execution', 'Unchanged'] }
+};
+function systemBadge(key, label) {
+  const system = systems[key];
+  return `<div class="system-badge"><span class="app-mark" aria-hidden="true">${system.mark}</span><strong>${system.name}</strong><span>${label}</span></div>`;
+}
+function renderSystems(phase, selected = systemScenes[phase].focus) {
+  const scene = systemScenes[phase];
+  byId('system-map').innerHTML = `<div class="systems-heading"><p class="eyebrow">THE SOFTWARE BEHIND THIS SCENE</p><span>Illustrative workflow · no live connections</span></div><div class="system-grid" role="group" aria-label="Explore each system">${Object.entries(systems).map(([key, system], index) => `<button class="system-node ${scene.active.includes(key) ? 'in-use' : ''}" data-system="${key}" aria-pressed="${selected === key}"><span class="app-mark" aria-hidden="true">${system.mark}</span><strong>${system.name}</strong><span>${scene.states[index]}</span></button>`).join('')}</div><p class="system-route">${scene.line}</p><div class="system-inspector" role="status"><strong>${systems[selected].name} · ${systems[selected].role}</strong><p>${systems[selected].detail}</p></div>`;
+}
+byId('system-map').addEventListener('click', event => {
+  const button = event.target.closest('[data-system]');
+  if (!button) return;
+  const selected = button.dataset.system;
+  renderSystems(storyState.phase, selected);
+  document.querySelector(`[data-system="${selected}"]`).focus({ preventScroll: true });
+});
+
 function sceneHeading(kicker, title, description) {
   return `<div class="scene-heading"><p class="eyebrow">${kicker}</p><h2 tabindex="-1" id="scene-title">${title}</h2><p>${description}</p></div>`;
 }
 function emailCard(highlight = false) {
   const message = highlight ? changes.map((change, i) => `<span class="email-fragment" data-fragment="${i}">${change.quote}${i < 2 ? ', ' : '. Thanks, Alex.'}</span>`).join('') : storyCopy[storyState.scenario];
-  return `<article class="message-card"><div class="message-top"><span class="avatar">A</span><div><strong>Alex</strong><span>Harbour Café · client</span></div><span class="service">Gmail / example</span></div><p class="subject">A small change to the spring campaign…</p><p class="cc">To Jamie · CC: <strong>${storyState.scenario === 'no-cc' ? 'not included' : 'pure-ai@example.com'}</strong></p><blockquote>${message}</blockquote><span class="source-label">AUTHORISED INPUT ONLY · FICTIONAL MESSAGE</span></article>`;
+  return `<article class="message-card">${systemBadge('gmail', 'Client email · simulated')}<div class="message-top"><span class="avatar">A</span><div><strong>Alex</strong><span>Harbour Café · client</span></div><span class="service">Gmail / example</span></div><p class="subject">A small change to the spring campaign…</p><p class="cc">To Jamie · CC: <strong>${storyState.scenario === 'no-cc' ? 'not included' : 'pure-ai@example.com'}</strong></p><blockquote>${message}</blockquote><span class="source-label">AUTHORISED INPUT ONLY · FICTIONAL MESSAGE</span></article>`;
 }
 function taskCards() {
   const count = storyState.applied;
@@ -57,23 +97,23 @@ function taskCards() {
 }
 function receiveView() {
   return sceneHeading('ACT 01 / THE REQUEST', 'The plan was settled. Then Alex emailed.', 'You’re Jamie. Three posters were due Friday, and a social video was planned. Let’s see what changed.') +
-    `<div class="scene-grid">${emailCard()}<aside class="context-card"><span class="large-mark" aria-hidden="true">↗</span><p class="eyebrow">THE CURRENT PLAN</p><h3>One campaign.<br>A few moving parts.</h3><p>Monday holds the work. The approved Drive brief supplies the context.</p><p class="small">${storyState.scenario === 'conflict' ? 'A same-day internal note still says Friday. Neither source clearly supersedes the other.' : 'Your job is to decide what happens next. Pure AI prepares the comparison.'}</p></aside></div>
+    `<div class="scene-grid">${emailCard()}<aside class="context-card">${systemBadge('drive', 'Approved campaign brief')}<span class="large-mark" aria-hidden="true">↗</span><p class="eyebrow">THE CURRENT PLAN</p><h3>One campaign.<br>A few moving parts.</h3><p>Monday holds the work. The approved Drive brief supplies the context.</p><p class="small">${storyState.scenario === 'conflict' ? 'A same-day internal note still says Friday. Neither source clearly supersedes the other.' : 'Your job is to decide what happens next. Pure AI prepares the comparison.'}</p></aside></div>
     <div class="scene-actions"><button class="primary" data-action="compare">See what changed <span aria-hidden="true">→</span></button><label class="scenario-picker">Choose a story <select id="scenario">${Object.entries(scenarioNames).map(([value, label]) => `<option value="${value}" ${storyState.scenario === value ? 'selected' : ''}>${label}</option>`).join('')}</select></label></div>`;
 }
 function compareView() {
   return sceneHeading('ACT 02 / CONNECT THE DOTS', 'A message becomes a clear next step.', 'Compare the client’s words with the work already in Monday. Nothing changes yet.') +
-    `<div class="scene-grid">${emailCard(true)}<div class="comparison-list">${changes.map((change, i) => `<article class="comparison" data-change="${i}"><span class="change-number">0${i + 1}</span><div><h3>${change.title}</h3><p><span class="before">${change.before}</span><span class="change-arrow"> → </span><strong>${change.after}</strong></p><p class="small">${change.why}</p></div></article>`).join('')}</div></div><div class="scene-actions"><p id="comparison-caption" role="status">Finding the campaign and its authorised context…</p><button class="secondary" data-action="skip">Skip animation →</button></div>`;
+    `<div class="scene-grid">${emailCard(true)}<div class="comparison-list">${systemBadge('openai', 'Comparing authorised sources')}${changes.map((change, i) => `<article class="comparison" data-change="${i}"><span class="change-number">0${i + 1}</span><div><h3>${change.title}</h3><p><span class="before">${change.before}</span><span class="change-arrow"> → </span><strong>${change.after}</strong></p><p class="small">${change.why}</p></div></article>`).join('')}</div></div><div class="scene-actions"><p id="comparison-caption" role="status">Finding the campaign and its authorised context…</p><button class="secondary" data-action="skip">Skip animation →</button></div>`;
 }
 function reviewView() {
   return sceneHeading('ACT 03 / YOUR CALL', 'Three suggestions. You have the final say.', 'Jamie, check the changes below. Each one is linked to the client’s words.') +
-    `<div class="review-list">${changes.map((change, i) => `<article class="review-change"><span class="change-number">0${i + 1}</span><div><h3>${change.title}</h3><div class="diff"><span>${change.before}</span><span aria-hidden="true">→</span><strong>${change.after}</strong></div><details><summary>Why this change?</summary><blockquote>“${change.quote}”</blockquote><p>${change.why} Compared with the approved brief and existing Monday task.</p></details></div></article>`).join('')}</div><div class="decision-footer"><p><strong>Nothing has changed in Monday.</strong><br><span class="small">Discord would show this proposal to an authorised reviewer.</span></p><div class="actions"><button class="primary" data-action="approve">Approve these 3 changes →</button><button class="secondary" data-action="reject">Keep the current plan</button></div></div>`;
+    `${systemBadge('discord', '#harbour-cafe · proposal for Jamie')}<div class="review-list">${changes.map((change, i) => `<article class="review-change"><span class="change-number">0${i + 1}</span><div><h3>${change.title}</h3><div class="diff"><span>${change.before}</span><span aria-hidden="true">→</span><strong>${change.after}</strong></div><details><summary>Why this change?</summary><blockquote>“${change.quote}”</blockquote><p>${change.why} Compared with the approved brief and existing Monday task.</p></details></div></article>`).join('')}</div><div class="decision-footer"><p><strong>Nothing has changed in Monday.</strong><br><span class="small">Discord would show this proposal to an authorised reviewer.</span></p><div class="actions"><button class="primary" data-action="approve">Approve these 3 changes →</button><button class="secondary" data-action="reject">Keep the current plan</button></div></div>`;
 }
 function endingActions() {
   return `<div class="ending-actions"><button class="primary" data-action="replay">Replay the story ↺</button><div><p class="small">A different twist?</p><button class="secondary" data-scenario="no-cc">The missing CC →</button><button class="secondary" data-scenario="conflict">Two dates, one deadline →</button></div></div>`;
 }
 function resultView(approved) {
   return sceneHeading('ACT 04 / THE OUTCOME', approved ? 'Your decision becomes the new plan.' : 'You kept the current plan.', approved ? 'n8n would apply only the approved changes. Watch them arrive in the example Monday board.' : 'The proposal was rejected. No task, owner or deadline has changed.') +
-    `<div class="board-caption"><span class="service">Monday / simulated work record</span><span id="board-status">${approved ? 'APPLYING APPROVED CHANGES' : 'UNCHANGED'}</span></div><div id="task-cards">${taskCards()}</div><div class="result-summary" id="result-summary" role="status">${approved ? 'Applying your decision…' : 'A useful assistant also knows when to stop. Jamie remains in control.'}</div><div id="ending">${approved ? '' : endingActions()}</div>`;
+    `<div class="execution-handoff">${systemBadge('discord', approved ? 'Jamie approved' : 'Jamie declined')}<span aria-hidden="true">→</span>${systemBadge('n8n', approved ? 'Apply approved changes' : 'Do not execute')}<span aria-hidden="true">→</span>${systemBadge('monday', 'Campaign board')}</div><div class="board-caption"><span class="service">Monday / simulated work record</span><span id="board-status">${approved ? 'APPLYING APPROVED CHANGES' : 'UNCHANGED'}</span></div><div id="task-cards">${taskCards()}</div><div class="result-summary" id="result-summary" role="status">${approved ? 'Applying your decision…' : 'A useful assistant also knows when to stop. Jamie remains in control.'}</div><div id="ending">${approved ? '' : endingActions()}</div>`;
 }
 function boundaryView(kind) {
   const ignored = kind === 'ignored';
@@ -108,6 +148,7 @@ function addLog(message) {
 }
 function renderScene(phase, html, step, focus = true) {
   storyState.phase = phase;
+  renderSystems(phase);
   const stage = byId('stage');
   stage.style.minHeight = `${stage.offsetHeight}px`;
   stage.innerHTML = html;
@@ -182,6 +223,7 @@ async function decide(approved) {
   }
   if (run !== storyState.run) return;
   storyState.phase = 'applied';
+  renderSystems('applied');
   byId('board-status').textContent = 'ALL 3 CHANGES APPLIED';
   byId('result-summary').textContent = 'Five posters. Thursday deadline. Video cancelled, history retained. Your team has one clear plan again.';
   byId('ending').innerHTML = endingActions();
