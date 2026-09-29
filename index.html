@@ -19,6 +19,15 @@ html{scroll-behavior:smooth}header{max-width:1280px}.wordmark{letter-spacing:-2p
 @media(max-width:1000px){.system-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.systems-heading{align-items:flex-start;flex-direction:column;gap:5px}}
 @media(max-width:750px){.system-map{padding:15px}.system-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.system-node{padding:12px}.system-inspector{min-height:120px}.system-badge{flex-wrap:wrap}.system-badge>span:last-child{width:100%;margin-left:39px}.context-card>.system-badge{margin:-22px -22px 20px}.execution-handoff{gap:6px}.execution-handoff .system-badge{min-width:0;padding:10px;justify-content:center;text-align:center}.execution-handoff .app-mark{display:none}.execution-handoff .system-badge>span:last-child{margin:0}.system-route{font-size:13px}}
 @media(prefers-reduced-motion:reduce){.system-node{transition:none}}
+
+.system-node{transition:background-color 280ms ease,border-color 280ms ease,color 280ms ease,box-shadow 280ms ease,transform 160ms ease;filter:none!important}
+.system-node:hover{box-shadow:0 4px 12px #25292312;transform:translateY(-2px)}
+.system-node:active:not(:disabled){transform:translateY(0)}
+.system-node .app-mark,.system-node>span:last-child{transition:background-color 280ms ease,border-color 280ms ease,color 280ms ease}
+.system-inspector{display:grid;align-items:start}
+.system-detail{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(5px);pointer-events:none;transition:opacity 220ms ease,transform 280ms cubic-bezier(.2,.7,.2,1),visibility 0s linear 280ms}
+.system-detail.is-selected{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;transition-delay:60ms,60ms,0s}
+@media(prefers-reduced-motion:reduce){.system-node,.system-node .app-mark,.system-node>span:last-child,.system-detail{transition:none!important;transform:none!important}}
 </style></head>
 <body>
 <header><a class="wordmark" href="#">pure<span> / AI</span></a><span class="tag">INTERACTIVE CONCEPT · SEPTEMBER 2026</span></header>
@@ -72,16 +81,28 @@ function systemBadge(key, label) {
   const system = systems[key];
   return `<div class="system-badge"><span class="app-mark" aria-hidden="true">${system.mark}</span><strong>${system.name}</strong><span>${label}</span></div>`;
 }
+let systemsMounted = false;
 function renderSystems(phase, selected = systemScenes[phase].focus) {
   const scene = systemScenes[phase];
-  byId('system-map').innerHTML = `<div class="systems-heading"><p class="eyebrow">THE SOFTWARE BEHIND THIS SCENE</p><span>Illustrative workflow · no live connections</span></div><div class="system-grid" role="group" aria-label="Explore each system">${Object.entries(systems).map(([key, system], index) => `<button class="system-node ${scene.active.includes(key) ? 'in-use' : ''}" data-system="${key}" aria-pressed="${selected === key}"><span class="app-mark" aria-hidden="true">${system.mark}</span><strong>${system.name}</strong><span>${scene.states[index]}</span></button>`).join('')}</div><p class="system-route">${scene.line}</p><div class="system-inspector" role="status"><strong>${systems[selected].name} · ${systems[selected].role}</strong><p>${systems[selected].detail}</p></div>`;
+  if (!systemsMounted) {
+    byId('system-map').innerHTML = `<div class="systems-heading"><p class="eyebrow">THE SOFTWARE BEHIND THIS SCENE</p><span>Illustrative workflow · no live connections</span></div><div class="system-grid" role="group" aria-label="Explore each system">${Object.entries(systems).map(([key, system]) => `<button id="system-${key}" class="system-node" data-system="${key}" aria-pressed="false"><span class="app-mark" aria-hidden="true">${system.mark}</span><strong>${system.name}</strong><span id="system-state-${key}"></span></button>`).join('')}</div><p id="system-route" class="system-route"></p><div class="system-inspector" aria-live="polite">${Object.entries(systems).map(([key, system]) => `<div id="system-detail-${key}" class="system-detail" aria-hidden="true"><strong>${system.name} · ${system.role}</strong><p>${system.detail}</p></div>`).join('')}</div>`;
+    systemsMounted = true;
+  }
+  Object.keys(systems).forEach((key, index) => {
+    const button = byId(`system-${key}`);
+    button.classList.toggle('in-use', scene.active.includes(key));
+    button.setAttribute('aria-pressed', String(selected === key));
+    byId(`system-state-${key}`).textContent = scene.states[index];
+    const detail = byId(`system-detail-${key}`);
+    detail.classList.toggle('is-selected', selected === key);
+    detail.setAttribute('aria-hidden', String(selected !== key));
+  });
+  if (byId('system-route').textContent !== scene.line) byId('system-route').textContent = scene.line;
 }
 byId('system-map').addEventListener('click', event => {
   const button = event.target.closest('[data-system]');
-  if (!button) return;
-  const selected = button.dataset.system;
-  renderSystems(storyState.phase, selected);
-  document.querySelector(`[data-system="${selected}"]`).focus({ preventScroll: true });
+  if (!button || button.getAttribute('aria-pressed') === 'true') return;
+  renderSystems(storyState.phase, button.dataset.system);
 });
 
 function sceneHeading(kicker, title, description) {
