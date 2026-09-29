@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pure AI | Work Intake Demo</title><style>:root{--bg:#f6f6f3;--paper:#fff;--ink:#242624;--muted:#62665f;--line:#d9dcd5;--accent:#fc7b00;--action:#252923;--green:#245b3b;--soft:#edf4ee;--warn:#805312}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header,main{max-width:1180px;margin:auto}header{display:flex;justify-content:space-between;align-items:center;padding:24px 30px;border-bottom:1px solid var(--line)}.wordmark{font-size:30px;font-weight:800;letter-spacing:-1.5px;color:var(--ink);text-decoration:none}.wordmark span{font-size:21px;font-weight:400;color:var(--muted)}main{padding:0 30px}.tag,.eyebrow,.panel-label{font-size:11px;letter-spacing:1.3px;font-weight:700}.tag{border:1px solid var(--line);padding:7px 10px;border-radius:4px}.intro{padding:54px 0 32px;max-width:810px}.eyebrow{color:var(--muted);margin:0 0 12px}.eyebrow:before{content:"";display:inline-block;width:7px;height:7px;background:var(--accent);margin-right:9px}h1{font-size:clamp(36px,5vw,58px);line-height:1.08;letter-spacing:-2px;margin:0 0 22px;font-weight:650}h2{font-size:25px;line-height:1.25;letter-spacing:-.7px;margin:0}h3{font-size:22px;margin:15px 0 3px;line-height:1.3}.lead{font-size:18px;max-width:730px}.disclaimer,.small{font-size:13px;color:var(--muted)}.steps{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--line);margin:8px 0 34px}.steps span{padding:15px 12px;color:var(--muted);font-size:14px;border-bottom:3px solid transparent}.steps .active{color:var(--ink);border-bottom-color:var(--accent);font-weight:700;background:#fff}.demo-heading,.board-heading{display:flex;align-items:center;justify-content:space-between;gap:20px}.demo-heading .eyebrow{margin-bottom:7px}.scenario-row{display:flex;align-items:center;gap:14px;margin:22px 0 16px}.scenario-row label{font-size:14px;font-weight:600}select{font:inherit;font-size:14px;padding:10px 36px 10px 12px;max-width:100%;background:white;border:1px solid #979e92;border-radius:6px;color:var(--ink)}.workspace{display:grid;grid-template-columns:1fr 1.12fr;gap:20px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:25px}.panel-label{display:flex;justify-content:space-between;gap:12px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:15px}.panel-label span:last-child{letter-spacing:0;font-weight:400}.muted{color:var(--muted);margin:4px 0 20px;font-size:14px}dl{margin:20px 0}dt{color:var(--muted)}.panel dl{display:grid;grid-template-columns:45px 1fr;gap:3px 8px;font-size:13px}.panel dd{margin:0;overflow-wrap:anywhere}blockquote{margin:20px 0;padding:16px 18px;background:var(--bg);border-left:3px solid var(--accent);font-size:16px}summary{cursor:pointer;font-size:14px;font-weight:600;padding:7px 0}details p{font-size:14px;color:var(--muted)}button{font:inherit;font-size:14px;font-weight:600;border-radius:6px;padding:11px 17px;min-height:44px;cursor:pointer;border:1px solid var(--line)}button.primary{background:var(--action);color:white;border-color:var(--action)}button.quiet,button.secondary{background:white;color:var(--ink)}button:hover:not(:disabled){filter:brightness(.93)}button:disabled{opacity:.55;cursor:default}button:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}.review{border-top:3px solid var(--accent)}.empty{padding:38px 0 20px}.empty h3{font-size:26px}.empty p{color:var(--muted)}.status{font-size:12px;font-weight:700;color:var(--green);margin:20px 0 6px}.proposal{list-style:none;padding:0;margin:18px 0}.proposal li{padding:13px 0;border-bottom:1px solid var(--line)}.proposal strong{display:block;font-size:15px}.proposal span{font-size:14px;color:var(--muted)}.actions{display:flex;gap:10px;flex-wrap:wrap}.notice{padding:13px 16px;background:var(--soft);font-size:14px;margin:18px 0}.warning{background:#faf3e7;color:var(--warn)}.board{margin-top:20px}.board-heading{margin-bottom:20px}.board h2{font-size:22px}.board .eyebrow{margin-bottom:8px}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;text-align:left}th{font-size:12px;color:var(--muted);font-weight:500}th,td{padding:13px 10px;border-bottom:1px solid var(--line)}td:first-child{font-weight:600}.pill{display:inline-block;background:#f0f1ed;padding:3px 9px;font-size:12px;border-radius:4px;white-space:nowrap}.changed{color:var(--green);font-weight:650}.board #outcome{font-size:13px;margin:17px 0 0;color:var(--muted)}.audit{padding:16px 4px}.audit ol{font-size:13px;color:var(--muted)}.explanation{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;padding:50px 0;border-block:1px solid var(--line);margin-top:25px}.explanation p{color:var(--muted)}.roles{display:grid;grid-template-columns:115px 1fr;gap:16px 20px;margin:0;font-size:14px}.roles dt{font-weight:700;color:var(--ink)}.roles dd{margin:0;color:var(--muted)}.scope{display:grid;grid-template-columns:1fr 1fr;gap:55px;padding:38px 0}.scope h3{font-size:19px}.scope p:last-child{font-size:14px;color:var(--muted)}footer{border-top:1px solid var(--line);padding:20px 0 35px;color:var(--muted);font-size:12px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:750px){header,main{padding-inline:18px}header .tag{font-size:9px;max-width:170px}.intro{padding-top:32px}.workspace,.explanation,.scope{grid-template-columns:1fr;gap:20px}.panel{padding:19px}.steps span{font-size:12px;padding:12px 5px}.demo-heading{align-items:flex-start}h2{font-size:22px}.board-heading{align-items:flex-start;flex-direction:column;gap:12px}.board table{min-width:570px}.scenario-row{align-items:flex-start;flex-direction:column;gap:5px}.explanation{padding:30px 0}.scope{padding:30px 0}.roles{grid-template-columns:100px 1fr;gap:14px}.quiet{white-space:nowrap}.panel-label{font-size:10px}}
+@media print{button,.scenario-row,.audit{display:none}body{background:white}.intro{padding-top:20px}.workspace{grid-template-columns:1fr 1fr}.panel{break-inside:avoid}header,main{max-width:none}}
+
+html{scroll-behavior:smooth}header{max-width:1280px}.wordmark{letter-spacing:-2px;font-size:36px}main{max-width:1280px}.intro{max-width:none;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:60px;padding:64px 0 48px}.intro h1{font-size:clamp(42px,5.5vw,72px);letter-spacing:-3px;line-height:1.03}.intro h1 em{font-family:Georgia,serif;font-weight:400}.intro .lead{font-size:17px;max-width:530px}.intro .disclaimer{font-size:11px;max-width:460px}.launch{display:inline-flex;align-items:center;gap:22px;text-decoration:none;padding:13px 20px;border-radius:30px;color:white;background:var(--action);font-weight:600;font-size:14px;margin:10px 0}.launch span{background:var(--accent);border-radius:50%;width:24px;height:24px;color:var(--ink);text-align:center}.story{position:relative;min-height:360px;background-image:radial-gradient(#d0d4ca 1px,transparent 1px);background-size:18px 18px;border-radius:24px;display:flex;flex-direction:column;justify-content:center;padding:25px;isolation:isolate}.story:before{content:"";position:absolute;inset:35px 15%;border:1px dashed #9aa18f;border-radius:50%;z-index:-1}.note{background:white;border:1px solid var(--line);padding:15px 20px;border-radius:12px;box-shadow:0 10px 30px #2529230b;max-width:290px;font-size:14px}.note small{font-size:10px;letter-spacing:1.5px;color:var(--muted);display:block;margin-bottom:6px}.note-one{transform:rotate(-5deg);align-self:flex-start}.note-two{transform:rotate(4deg);align-self:flex-end}.note-two b{color:var(--green)}.spark{align-self:center;display:grid;place-items:center;width:85px;height:85px;border-radius:28px;background:var(--accent);font-size:45px;margin:18px 0;box-shadow:0 0 0 12px #fc7b0015;animation:breathe 4s ease-in-out infinite}.story-caption{text-align:center;font-size:11px;letter-spacing:1px;margin:20px 0 0;color:var(--muted)}.steps{border:0;background:#e9ebe5;border-radius:12px;padding:5px;gap:5px}.steps span{border:0;border-radius:8px;text-align:center;transition:background .2s}.steps span.active{background:var(--action);color:white;box-shadow:0 3px 6px #0001}.steps span.done{color:var(--green);background:var(--soft)}.demo-heading{scroll-margin-top:24px}.scenario-row{padding:16px 0}.workspace{gap:24px}.panel{box-shadow:0 4px 16px #25292303;border-radius:16px;padding:28px}.review{border-top:1px solid var(--line);position:relative;overflow:hidden}.review:before{content:"";height:5px;background:var(--accent);position:absolute;top:0;left:0;right:0}.panel h3{letter-spacing:-.5px}.panel-label{letter-spacing:1px}.empty{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:380px;margin:auto;padding:36px 0}.empty:before{content:"✳";display:grid;place-items:center;background:#fff0df;color:#9a4a00;width:64px;height:64px;font-size:42px;border-radius:22px;margin-bottom:24px}.empty h3{font-size:33px;letter-spacing:-1px;margin-top:0}.empty p{font-size:14px}.proposal li{display:grid;grid-template-columns:30px 1fr;column-gap:12px;animation:arrive .35s ease-out both}.proposal li:before{content:"↗";grid-row:span 2;background:var(--soft);color:var(--green);width:28px;height:28px;text-align:center;border-radius:8px}.proposal li:nth-child(2){animation-delay:.1s}.proposal li:nth-child(3){animation-delay:.2s}.proposal li span{grid-column:2}button{transition:transform .15s,background .15s}button:active:not(:disabled){transform:translateY(2px)}button.primary{border-radius:24px;padding-inline:22px}.notice{border-radius:9px;animation:arrive .35s ease-out}.board{margin-top:24px;border-top:4px solid var(--line);transition:border-color .3s}.board.applied{border-top-color:var(--green)}.board.applied .changed{animation:highlight 1.2s ease-out}.board .tag{border-radius:20px}.board.applied .tag{background:var(--soft);color:var(--green);border-color:#c4d8c8}.explanation{gap:90px}.roles dt{border-left:3px solid var(--accent);padding-left:12px}.progress-list{list-style:none;padding:0;margin:26px 0}.progress-list li{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)}.progress-list li:before{content:"○"}.progress-list li.complete{color:var(--green)}.progress-list li.complete:before{content:"✓"}.processing-title{margin-top:28px}.loading-orb{display:inline-block;width:10px;height:10px;background:var(--accent);border-radius:50%;margin-right:8px;animation:breathe 1s infinite}.stage-caption{font-size:13px;color:var(--muted);margin:-20px 0 30px;min-height:21px}.scroll-hint{display:none;font-size:11px;color:var(--muted)}
+@keyframes breathe{50%{transform:scale(1.06) rotate(8deg)}}@keyframes arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes highlight{from{background:#dcebcf}to{background:transparent}}
+@media(max-width:900px){.intro{gap:30px}.story{padding:15px;min-height:340px}.note{max-width:240px}.intro h1{font-size:51px}.explanation{gap:35px}}
+@media(max-width:750px){.intro{grid-template-columns:1fr;padding:35px 0 28px;gap:25px}.intro h1{font-size:48px}.story{min-height:290px;max-width:480px;width:100%;margin:auto;padding:15px 20px}.spark{width:62px;height:62px;font-size:35px;margin:12px}.note{font-size:13px;padding:12px 16px}.story-caption{margin-top:12px}.panel{padding:21px}.steps span{font-size:11px}.empty{padding:20px 0}.empty:before{margin-bottom:15px}.explanation{gap:20px}.scroll-hint{display:block}.stage-caption{font-size:12px}.board-heading{gap:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<header><a class="wordmark" href="#">pure<span> / AI</span></a><span class="tag">INTERACTIVE CONCEPT · SEPTEMBER 2026</span></header>
+<main>
+<section class="intro"><div><p class="eyebrow">A HANDS ON LOOK AT PURE AI</p><h1>A little less admin.<br><em>A lot more clarity.</em></h1><p class="lead">A client changes their mind. Pure AI connects the dots. Your team decides what happens next.</p><a class="launch" href="#walkthrough">Try the interactive story <span>↗</span></a><p class="disclaimer">Concept demonstration · Fictional data · No live connections</p></div><div class="story" aria-label="A client message becomes a proposal, then approved work"><div class="note note-one"><small>01 / A CLIENT MESSAGE</small>“Can we make that five posters<br>and bring the deadline forward?”</div><div class="spark" aria-hidden="true">✳</div><div class="note note-two"><small>02 / A CLEAR NEXT STEP</small>3 proposed changes.<br><b>Ready for your review.</b></div><p class="story-caption">UNDERSTAND → PROPOSE → APPROVE</p></div></section>
+<nav class="steps" aria-label="Workflow"><span id="step1">01 &nbsp; Receive</span><span id="step2">02 &nbsp; Compare</span><span id="step3">03 &nbsp; Review</span><span id="step4">04 &nbsp; Update</span></nav><p class="stage-caption" id="stage-caption" role="status">Start with a fictional client message. You are in control.</p>
+<div class="demo-heading" id="walkthrough"><div><p class="eyebrow">TRY THE WORKFLOW</p><h2>A client changes the brief.</h2></div><button class="quiet" id="reset">Reset demo ↺</button></div>
+<div class="scenario-row"><label for="scenario">Example</label><select id="scenario"><option value="change">Client requests a change</option><option value="no-cc">Email does not CC Pure AI</option><option value="conflict">Two instructions conflict</option></select></div>
+<div class="workspace">
+<section class="panel"><div class="panel-label"><span>01 / SOURCE</span><span>Gmail · simulated</span></div><h3>Harbour Café</h3><p class="muted">Spring campaign / revised deliverables</p><dl><dt>From</dt><dd>Alex · client contact</dd><dt>To</dt><dd>Jamie · account manager</dd><dt>CC</dt><dd id="cc">pure-ai@example.com</dd></dl><blockquote id="email"></blockquote><details><summary>Existing brief · Drive example</summary><p>Approved scope: three campaign posters, due Friday 16 October 2026. Owner: Morgan. One social video is also planned. This is fictional reference material.</p></details><p class="small" id="source-note">Only explicitly CC’d emails enter the workflow.</p><button class="primary" id="analyse">Compare with current work →</button></section>
+<section class="panel review"><div class="panel-label"><span>02 / REVIEW</span><span>Discord · simulated</span></div><div id="review" aria-live="polite"></div></section>
+</div>
+<section class="panel board"><div class="board-heading"><div><p class="eyebrow">03 / WORK RECORD</p><h2>Monday stays the source of truth.</h2></div><span class="tag" id="board-state">UNCHANGED</span></div><p class="scroll-hint">Swipe the table to see dates and statuses →</p><div class="table-scroll"><table><caption class="sr-only">Simulated Monday tasks for Harbour Café</caption><thead><tr><th>Task</th><th>Scope</th><th>Owner</th><th>Due</th><th>Status</th></tr></thead><tbody id="tasks"></tbody></table></div><p id="outcome" role="status">No changes yet. Review a proposal before updating this example board.</p></section>
+<details class="audit"><summary>View this demo’s activity record</summary><ol id="log"></ol></details>
+<section class="explanation"><div><p class="eyebrow">HOW IT WOULD WORK</p><h2>Each tool has a clear job.</h2><p>Staff work through Discord. Monday holds operational work. The workflow uses only authorised sources.</p></div><dl class="roles"><dt>Gmail + Drive</dt><dd>Supply CC’d correspondence and authorised project material.</dd><dt>OpenAI</dt><dd>Interpret the request and suggest changes using relevant context.</dd><dt>n8n</dt><dd>Connect the systems and execute the approved actions.</dd><dt>Discord</dt><dd>Show proposals to authorised reviewers and report outcomes.</dd><dt>Monday</dt><dd>Keep the current tasks, owners, dates and statuses.</dd></dl></section>
+<section class="scope"><div><p class="eyebrow">FROM STEVEN’S BRIEF</p><h3>Keep the starting model controlled.</h3><p>CC-only email intake, client separation, staff permissions, human approval and an activity record. Briefs, notes and transcripts can also start the same workflow.</p></div><div><p class="eyebrow">SUGGESTED PILOT · TO AGREE</p><h3>Start small, then measure usefulness.</h3><p>Begin with a small set of clients and reviewers. Test historical examples before live use. Add Ask Pure and proactive alerts once intake and updates are reliable.</p></div></section>
+<footer><p>Prepared by Daniel for discussion with Steven · Based on the Pure AI Agent Strategy & Implementation Plan</p><p>This walkthrough illustrates behaviour. It does not validate live AI accuracy, permissions or integrations. Scope, access, hosting, cost and timing remain to be agreed.</p></footer>
+</main><script>const $ = id => document.getElementById(id);
+const scenarios = {
+  change: 'Please increase the campaign posters from three to five, bring the deadline forward to Thursday 15 October, and cancel the social video. Thanks, Alex.',
+  'no-cc': 'Please increase the campaign posters from three to five and bring the deadline forward to Thursday 15 October. Thanks, Alex.',
+  conflict: 'The poster deadline is Thursday 15 October. A second authorised note from the same day says Friday 16 October. Neither source clearly supersedes the other.'
+};
+let stage = 'ready';
+let playback = 0;
+function addLog(message) {
+  const item = document.createElement('li');
+  item.textContent = message;
+  $('log').append(item);
+}
+function setStep(number) {
+  const captions = ['Start with a fictional client message. You are in control.', 'Comparing authorised sources with current work. Simulated analysis.', 'Your turn. Review the evidence before making a decision.', 'Approved changes are now visible on the example board.'];
+  $('stage-caption').textContent = captions[number - 1];
+  for (let index = 1; index <= 4; index++) {
+    $('step' + index).classList.toggle('active', index === number);
+    $('step' + index).classList.toggle('done', index < number);
+    if (index === number) $('step' + index).setAttribute('aria-current', 'step');
+    else $('step' + index).removeAttribute('aria-current');
+  }
+}
+function renderBoard(updated = false) {
+  $('tasks').innerHTML = `<tr><td>Campaign posters</td><td class="${updated ? 'changed' : ''}">${updated ? '5' : '3'} posters</td><td>Morgan</td><td class="${updated ? 'changed' : ''}">${updated ? 'Thu 15' : 'Fri 16'} Oct 2026</td><td><span class="pill">In progress</span></td></tr><tr><td>Social video</td><td>1 video</td><td>Taylor</td><td>Fri 16 Oct 2026</td><td><span class="pill ${updated ? 'changed' : ''}">${updated ? 'Cancelled' : 'Planned'}</span></td></tr>`;
+}
+function resetDemo() {
+  playback++;
+  document.querySelector('.board').classList.remove('applied');
+  stage = 'ready';
+  const selected = $('scenario').value;
+  $('email').textContent = scenarios[selected];
+  $('cc').textContent = selected === 'no-cc' ? 'Not included' : 'pure-ai@example.com';
+  $('source-note').textContent = selected === 'no-cc' ? 'Shown for illustration only. In production, this message is not ingested or sent to the model.' : 'Only explicitly CC’d emails enter the workflow.';
+  $('review').innerHTML = '<div class="empty"><p class="eyebrow">WAITING FOR INPUT</p><h3>AI prepares.<br>People decide.</h3><p>Start with the example on the left. The proposed changes will appear here before anything on the board changes.</p><p class="small">In production, client and staff permissions must be checked before retrieval and execution.</p></div>';
+  $('analyse').disabled = false;
+  $('analyse').textContent = selected === 'no-cc' ? 'Check email eligibility →' : 'Compare with current work →';
+  $('board-state').textContent = 'UNCHANGED';
+  $('outcome').textContent = 'No changes yet. Review a proposal before updating this example board.';
+  $('log').replaceChildren();
+  addLog('Demo reset. Fictional Harbour Café board loaded.');
+  renderBoard();
+  setStep(1);
+}
+async function analyse() {
+  if (stage !== 'ready') return;
+  $('analyse').disabled = true;
+  const selected = $('scenario').value;
+  if (selected === 'no-cc') {
+    stage = 'ignored';
+    $('review').innerHTML = '<p class="status">IGNORED · CC RULE</p><h3>No intake, no task changes.</h3><p>The dedicated Pure AI address is absent from the CC field.</p><div class="notice">The production workflow would not send this email to OpenAI or add it to project context.</div><p class="small">Select another example or reset to try again.</p>';
+    addLog('Eligibility example: CC missing. No model analysis or board update.');
+    return;
+  }
+  stage = 'processing';
+  const currentPlayback = ++playback;
+  setStep(2);
+  $('review').innerHTML = '<h3 class="processing-title"><span class="loading-orb" aria-hidden="true"></span>Connecting the dots.</h3><p class="small">Illustrative steps — no live AI call.</p><ol class="progress-list"><li id="check-client">Identify Harbour Café and the campaign</li><li id="check-context">Read the authorised brief and current tasks</li><li id="check-changes">Compare new instructions with existing work</li></ol>';
+  for (const id of ['check-client', 'check-context', 'check-changes']) {
+    await new Promise(resolve => setTimeout(resolve, 550));
+    if (currentPlayback !== playback) return;
+    $(id).classList.add('complete');
+  }
+  addLog('Simulation: authorised Harbour Café email, brief and current tasks compared.');
+  if (selected === 'conflict') {
+    stage = 'blocked';
+    setStep(3);
+    $('review').innerHTML = '<p class="status">REVIEW NEEDED</p><h3>Which date is correct?</h3><div class="notice warning">Email: Thursday 15 October.<br>Internal note: Friday 16 October.<br>No clear decision resolves the conflict.</div><p>Ask the account manager to confirm the deadline. No executable change is proposed.</p><p class="small">This demo stops here. In production, an authorised clarification would start a fresh proposal.</p>';
+    addLog('Conflicting deadlines flagged. Human clarification required; board unchanged.');
+    return;
+  }
+  stage = 'review';
+  setStep(3);
+  $('review').innerHTML = '<p class="status">PROPOSAL P-001 · AWAITING APPROVAL</p><h3>Three changes to review.</h3><ul class="proposal"><li><strong>Update poster quantity</strong><span>3 posters → 5 posters</span></li><li><strong>Bring the poster deadline forward</strong><span>Friday 16 October → Thursday 15 October 2026</span></li><li><strong>Cancel the social video</strong><span>Planned → Cancelled · task retained</span></li></ul><p class="small">Evidence: revised client email shown on the left, compared with the existing brief and board. Owners stay unchanged.</p><div class="actions"><button class="primary" id="approve">Approve all 3 changes</button><button class="secondary" id="reject">Reject proposal</button></div><p class="small">Simulated reviewer: Jamie, Harbour Café account manager.</p>';
+  $('approve').addEventListener('click', () => decide(true));
+  $('reject').addEventListener('click', () => decide(false));
+  addLog('Proposal P-001 prepared. Awaiting the simulated reviewer’s decision.');
+}
+function decide(approved) {
+  if (stage !== 'review') return;
+  stage = approved ? 'applied' : 'rejected';
+  $('approve').disabled = true;
+  $('reject').disabled = true;
+  const result = document.createElement('p');
+  result.className = 'notice';
+  result.textContent = approved ? 'Approved by simulated reviewer Jamie. All three changes have been applied to the example board.' : 'Proposal rejected. The example board has not changed.';
+  $('review').append(result);
+  $('review').querySelector('.status').textContent = approved ? 'PROPOSAL P-001 · APPLIED' : 'PROPOSAL P-001 · REJECTED';
+  $('board-state').textContent = approved ? 'UPDATED · DEMO' : 'UNCHANGED';
+  $('outcome').textContent = approved ? 'Demo result: quantity and deadline updated; video marked cancelled. No real Monday data was modified.' : 'Rejected by simulated reviewer Jamie. No task changes were made.';
+  if (approved) { renderBoard(true); setStep(4); document.querySelector('.board').classList.add('applied'); }
+  $('review').querySelector('h3').textContent = approved ? 'Your changes are in.' : 'You stay in control.';
+  addLog(approved ? 'Jamie approved P-001. Simulated execution completed once: three changes, no duplicate tasks.' : 'Jamie rejected P-001. Nothing executed.');
+}
+$('analyse').addEventListener('click', analyse);
+$('reset').addEventListener('click', resetDemo);
+$('scenario').addEventListener('change', resetDemo);
+resetDemo();
+</script>
+</body></html>
